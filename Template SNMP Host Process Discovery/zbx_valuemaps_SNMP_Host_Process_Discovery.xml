@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.4</version>
+    <date>2018-03-26T11:09:29Z</date>
+    <value_maps>
+        <value_map>
+            <name>Host SNMP hrSWRunStatus</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Running</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Runnable</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Not Runnable</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Invalid</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Host SNMP hrSWRunType</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Unknown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>Operating System</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Device Driver</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>Application</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>

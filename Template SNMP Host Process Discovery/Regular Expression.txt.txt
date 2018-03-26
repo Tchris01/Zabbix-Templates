@@ -1,0 +1,2 @@
+test-non-nul
+1	»	^.{0}$	[Result is FALSE]
