@@ -1,0 +1,1 @@
+Linux Process Discover filter	^(httpd|grafana-server|zabbix_agentd|zabbix_server|sshd)$	[Result is TRUE]

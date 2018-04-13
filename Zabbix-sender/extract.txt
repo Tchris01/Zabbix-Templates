@@ -1,0 +1,3 @@
+"BaliseA" "geo.x" "154.876"
+"BaliseA" "geo.y" "14.876"
+"BaliseA" "user.status" "Nominal"

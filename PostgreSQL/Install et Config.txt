@@ -1,0 +1,9 @@
+# mv ${PGDATA}/pg_log /var/log/postgres
+# chmod 0755 /var/log/postgres
+# ln -s /var/log/postgres ${PGDATA}/pg_log
+# chown -h postgres.postgres ${PGDATA}/pg_log
+{$PGLOGDIR} => /var/log/postgres
+
+And then, give the zabbix user read permission such as:
+
+log_file_mode = 0644

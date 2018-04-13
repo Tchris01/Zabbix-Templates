@@ -1,0 +1,5 @@
+Agent
+Copy userparameter_md.conf to /etc/zabbix/zabbix_agentd.d/userparameter_md.conf
+Restart zabbix_agent
+Server
+Import template template_md.xml file

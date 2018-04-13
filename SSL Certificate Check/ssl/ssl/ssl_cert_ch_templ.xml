@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>3.2</version>
+    <date>2017-06-05T13:31:39Z</date>
+    <groups>
+        <group>
+            <name>MyTemplates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template SSL Cert Check External</template>
+            <name>Template SSL Cert Check External</name>
+            <description/>
+            <groups>
+                <group>
+                    <name>MyTemplates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>SSL certificate</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>HTTPS Service is running</name>
+                    <type>3</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>net.tcp.service[https]</key>
+                    <delay>60</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications/>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>{$SNI} SSL certificate validity</name>
+                    <type>10</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}]</key>
+                    <delay>86400</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units>days</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SSL certificate</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>SSL certificate issuer</name>
+                    <type>10</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>zext_ssl_cert.sh[-i,{HOST.CONN},{$SSL_PORT},{$SNI}]</key>
+                    <delay>86400</delay>
+                    <history>0</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>4</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SSL certificate</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+            </items>
+            <discovery_rules/>
+            <httptests/>
+            <macros>
+                <macro>
+                    <macro>{$SNI}</macro>
+                    <value>{HOST.NAME}</value>
+                </macro>
+                <macro>
+                    <macro>{$SSL_PORT}</macro>
+                    <value>443</value>
+                </macro>
+            </macros>
+            <templates/>
+            <screens/>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template SSL Cert Check External:net.tcp.service[https].max(5m)}&lt;1</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>HTTPS Service is Down</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;0</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>SSL certificate on {HOSTNAME} expired</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>5</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;2</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>SSL certificate on {HOSTNAME} expires in less than 2 days ({ITEM.VALUE} remaining)</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>4</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>SSL certificate on {HOSTNAME} expired</name>
+                    <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;0</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;4</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>SSL certificate on {HOSTNAME} expires in less than 4 days ({ITEM.VALUE} remaining)</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>SSL certificate on {HOSTNAME} expires in less than 2 days ({ITEM.VALUE} remaining)</name>
+                    <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;2</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;7</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>SSL certificate on {HOSTNAME} expires in less than 7 days ({ITEM.VALUE} remaining)</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>SSL certificate on {HOSTNAME} expires in less than 4 days ({ITEM.VALUE} remaining)</name>
+                    <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;4</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;14</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>SSL certificate on {HOSTNAME} expires in less than 14 days ({ITEM.VALUE} remaining)</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>1</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>SSL certificate on {HOSTNAME} expires in less than 7 days ({ITEM.VALUE} remaining)</name>
+                    <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;7</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;20</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>SSL certificate on {HOSTNAME} expires in less than 20 days ({ITEM.VALUE} remaining)</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>0</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies>
+                <dependency>
+                    <name>SSL certificate on {HOSTNAME} expires in less than 14 days ({ITEM.VALUE} remaining)</name>
+                    <expression>{Template SSL Cert Check External:zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}].last(0)}&lt;14</expression>
+                    <recovery_expression/>
+                </dependency>
+            </dependencies>
+            <tags/>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>SSL Certificate valid days</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>BB00BB</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template SSL Cert Check External</host>
+                        <key>zext_ssl_cert.sh[-d,{HOST.CONN},{$SSL_PORT},{$SNI}]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+    <value_maps>
+        <value_map>
+            <name>Service state</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Up</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
