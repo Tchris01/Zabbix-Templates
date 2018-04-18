@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.2</version>
-    <date>2017-07-31T14:26:09Z</date>
+    <version>3.4</version>
+    <date>2018-04-18T22:17:52Z</date>
     <groups>
         <group>
-            <name>Templates</name>
+            <name>Templates/Custom/Passive</name>
         </group>
     </groups>
     <templates>
@@ -14,7 +14,7 @@
             <description/>
             <groups>
                 <group>
-                    <name>Templates</name>
+                    <name>Templates/Custom/Passive</name>
                 </group>
             </groups>
             <applications>
@@ -30,7 +30,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>ps.discovery</key>
-                    <delay>60</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -40,7 +40,6 @@
                     <snmpv3_authpassphrase/>
                     <snmpv3_privprotocol>0</snmpv3_privprotocol>
                     <snmpv3_privpassphrase/>
-                    <delay_flex/>
                     <params/>
                     <ipmi_sensor/>
                     <authtype>0</authtype>
@@ -50,36 +49,34 @@
                     <privatekey/>
                     <port/>
                     <filter>
-                        <evaltype>0</evaltype>
+                        <evaltype>1</evaltype>
                         <formula/>
                         <conditions>
                             <condition>
-                                <macro>{#PSNAME}</macro>
-                                <value>@Linux Process Discover filter</value>
+                                <macro>{#PSPPID}</macro>
+                                <value>^1$</value>
                                 <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>7</lifetime>
+                    <lifetime>0d</lifetime>
                     <description>Discovers running processes via ps.&#13;
 Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process name and owning user respectively.</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>CPU usage of $1 processes owned by $2</name>
+                            <name>{#PSCMD} ({#PSPID}): {#PSARGS} owned by {#PSUSER}: CPU usage</name>
                             <type>0</type>
                             <snmp_community/>
-                            <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>proc.cpu[{#PSNAME},{#PSUSER}]</key>
-                            <delay>30</delay>
-                            <history>90</history>
-                            <trends>365</trends>
+                            <key>proc.cpu.util[{#PSCMD},{#PSUSER},,&quot;{#PSARGS}&quot;,]</key>
+                            <delay>60s</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
                             <status>0</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>%</units>
-                            <delta>0</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -87,11 +84,8 @@ Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process na
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
                             <params/>
                             <ipmi_sensor/>
-                            <data_type>0</data_type>
                             <authtype>0</authtype>
                             <username/>
                             <password/>
@@ -107,23 +101,28 @@ Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process na
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <application_prototypes/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>{#PSCMD}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Memory usage of $1 processes owned by $2</name>
+                            <name>{#PSCMD} ({#PSPID}): {#PSARGS} owned by {#PSUSER}: Memory usage</name>
                             <type>0</type>
                             <snmp_community/>
-                            <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>proc.mem[{#PSNAME},{#PSUSER},max,]</key>
-                            <delay>30</delay>
-                            <history>90</history>
-                            <trends>365</trends>
+                            <key>proc.mem[{#PSCMD},{#PSUSER},,&quot;{#PSARGS}&quot;,]</key>
+                            <delay>60s</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>B</units>
-                            <delta>0</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -131,11 +130,8 @@ Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process na
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
                             <params/>
                             <ipmi_sensor/>
-                            <data_type>0</data_type>
                             <authtype>0</authtype>
                             <username/>
                             <password/>
@@ -151,23 +147,28 @@ Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process na
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <application_prototypes/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>{#PSCMD}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Number of $1 processes owned by $2</name>
+                            <name>{#PSCMD} ({#PSPID}): {#PSARGS} owned by {#PSUSER}: Number of processes</name>
                             <type>0</type>
                             <snmp_community/>
-                            <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>proc.num[{#PSNAME},{#PSUSER},,]</key>
-                            <delay>30</delay>
-                            <history>90</history>
-                            <trends>365</trends>
+                            <key>proc.num[{#PSCMD},{#PSUSER},,]</key>
+                            <delay>60s</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
                             <status>0</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
-                            <delta>0</delta>
                             <snmpv3_contextname/>
                             <snmpv3_securityname/>
                             <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -175,11 +176,8 @@ Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process na
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
                             <params/>
                             <ipmi_sensor/>
-                            <data_type>0</data_type>
                             <authtype>0</authtype>
                             <username/>
                             <password/>
@@ -195,12 +193,83 @@ Returns the {#PSNAME} and {#PSUSER} discovery macros which return the process na
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <application_prototypes/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>{#PSCMD}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>{#PSCMD} ({#PSPID}): {#PSARGS} owned by {#PSUSER}: PID Number history</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>ps.get.pid[{#PSCMD},{#PSUSER}]</key>
+                            <delay>60s</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Process Statistics</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>{#PSCMD}</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <master_item_prototype/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes/>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Template App Linux Process Discovery:proc.num[{#PSCMD},{#PSUSER},,].last()}=0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Dectected process {#PSNAME} from user {#PSUSER} goes down</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>1</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
                     <graph_prototypes/>
                     <host_prototypes/>
+                    <jmx_endpoint/>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
