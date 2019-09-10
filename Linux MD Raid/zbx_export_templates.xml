@@ -4,7 +4,7 @@
     <date>2019-09-10T15:38:17Z</date>
     <groups>
         <group>
-            <name>PMS/Templates/Apps</name>
+            <name>Templates</name>
         </group>
     </groups>
     <templates>
@@ -14,7 +14,7 @@
             <description>Monitoring of MD Soft RAID</description>
             <groups>
                 <group>
-                    <name>PMS/Templates/Apps</name>
+                    <name>Templates</name>
                 </group>
             </groups>
             <applications>
